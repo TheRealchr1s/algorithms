@@ -1,4 +1,6 @@
 import random
+import timeit
+import argparse
 
 # Impl of Union-Find data structure
 class UnionFind:
@@ -13,7 +15,7 @@ class UnionFind:
             self.parent[x] = self.find(self.parent[x])  # Path compression for optimization
         return self.parent[x]
 
-    # Union op to merge sets of x and y
+    # Union operation to merge sets of x and y
     def union(self, x, y):
         root_x = self.find(x)
         root_y = self.find(y)
@@ -28,25 +30,21 @@ class UnionFind:
                 self.parent[root_x] = root_y
                 self.rank[root_y] += 1
 
-
 # Function to find connected blocks using Union-Find
 def find_adjacent_blocks_union_find(matrix):
     rows, cols = len(matrix), len(matrix[0])
     uf = UnionFind(rows * cols)
 
-    # Iterate through the matrix to perform union operation for adjacent 1's
     for i in range(rows):
         for j in range(cols):
             if matrix[i][j] == 1:
                 current_index = i * cols + j
 
-                # Check right and down neighbors
                 if j + 1 < cols and matrix[i][j + 1] == 1:
                     uf.union(current_index, i * cols + j + 1)
                 if i + 1 < rows and matrix[i + 1][j] == 1:
                     uf.union(current_index, (i + 1) * cols + j)
 
-    # Create a dictionary to store connected blocks
     blocks = {}
     for i in range(rows):
         for j in range(cols):
@@ -58,7 +56,6 @@ def find_adjacent_blocks_union_find(matrix):
                 blocks[root].append((i, j))
 
     return list(blocks.values())
-
 
 # Function to print a colored matrix with labeled connected blocks
 def print_colored_matrix(matrix, blocks):
@@ -73,42 +70,33 @@ def print_colored_matrix(matrix, blocks):
             if block_number != -1:
                 # Use ANSI escape codes for text color
                 color_code = 31 + (block_number % 6)  # 31 to 36 are ANSI color codes for red to cyan
-                print("\033[1;{}m{}\033[0m".format(color_code, matrix[i][j]), end=" ")
+                print("\033[1;{}m{}\033[0m".format(color_code, '■' if matrix[i][j] == 1 else '□'), end=" ")
             else:
-                print(matrix[i][j], end=" ")
+                print('□' if matrix[i][j] == 0 else '■', end=" ")
         print()
 
-# # Example usage
-# matrix = [
-#     [1, 1, 0, 1, 0, 0, 1, 1],
-#     [0, 1, 0, 1, 1, 0, 1, 1],
-#     [0, 0, 0, 1, 0, 0, 1, 1],
-#     [0, 0, 0, 1, 0, 0, 1, 1],
-#     [0, 0, 0, 1, 0, 0, 1, 1],
-#     [1, 0, 1, 1, 0, 0, 1, 0]
-# ]
+def main():
+    parser = argparse.ArgumentParser(description="Find and print connected blocks in a matrix using Union-Find.")
 
-# # Find and print connected blocks using Union-Find
-# result_union_find = find_adjacent_blocks_union_find(matrix)
-# print_colored_matrix(matrix, result_union_find)
+    parser.add_argument("--rows", type=int, default=10, help="Number of rows in the matrix")
+    parser.add_argument("--cols", type=int, default=50, help="Number of columns in the matrix")
+    parser.add_argument("--density", type=float, default=0.8, help="Density of filled blocks in the matrix (between 0 and 1)")
+    parser.add_argument("--random_seed", type=int, default=None, help="Seed for random number generation")
+    parser.add_argument("--print_time", action="store_true", help="Print the execution time of the Union-Find operation")
 
+    args = parser.parse_args()
 
-# # Example usage with a much larger matrix with more blocks
-# matrix = [
-#     [1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1],
-#     [0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1],
-#     [0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0],
-#     [0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0],
-#     [1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0]
-# ]
+    if args.random_seed:
+        random.seed(args.random_seed)
 
-# # Find and print connected blocks using Union-Find
-# result_union_find = find_adjacent_blocks_union_find(matrix)
-# print_colored_matrix(matrix, result_union_find)
+    matrix = [[0 if random.random() < args.density else 1 for _ in range(args.cols)] for _ in range(args.rows)]
 
+    if args.print_time:
+        time_taken = timeit.timeit(lambda: find_adjacent_blocks_union_find(matrix), number=1)
+        print("Execution time:", time_taken, "seconds")
 
-matrix = [[0 if random.random() < 0.6 else 1 for _ in range(50)] for _ in range(10)]
+    result_union_find = find_adjacent_blocks_union_find(matrix)
+    print_colored_matrix(matrix, result_union_find)
 
-# Find and print connected blocks using Union-Find
-result_union_find = find_adjacent_blocks_union_find(matrix)
-print_colored_matrix(matrix, result_union_find)
+if __name__ == "__main__":
+    main()

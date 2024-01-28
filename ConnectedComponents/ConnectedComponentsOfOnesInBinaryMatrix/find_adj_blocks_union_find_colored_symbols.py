@@ -1,3 +1,4 @@
+import timeit
 import random
 
 # Impl of Union-Find data structure
@@ -34,19 +35,16 @@ def find_adjacent_blocks_union_find(matrix):
     rows, cols = len(matrix), len(matrix[0])
     uf = UnionFind(rows * cols)
 
-    # Iterate through the matrix to perform union operation for adjacent filled blocks
     for i in range(rows):
         for j in range(cols):
             if matrix[i][j] == 1:
                 current_index = i * cols + j
 
-                # Check right and down neighbors
                 if j + 1 < cols and matrix[i][j + 1] == 1:
                     uf.union(current_index, i * cols + j + 1)
                 if i + 1 < rows and matrix[i + 1][j] == 1:
                     uf.union(current_index, (i + 1) * cols + j)
 
-    # Create a dictionary to store connected blocks
     blocks = {}
     for i in range(rows):
         for j in range(cols):
@@ -58,7 +56,6 @@ def find_adjacent_blocks_union_find(matrix):
                 blocks[root].append((i, j))
 
     return list(blocks.values())
-
 
 # Function to print a colored matrix with labeled connected blocks
 def print_colored_matrix(matrix, blocks):
@@ -88,10 +85,13 @@ def print_colored_matrix(matrix, blocks):
 # ]
 
 
-matrix = [[0 if random.random() < 0.8 else 1 for _ in range(100)] for _ in range(10)]
+matrix = [[0 if random.random() < 0.8 else 1 for _ in range(50)] for _ in range(1000)]
 
 
+# Wrap the function call with timeit
+time_taken = timeit.timeit(lambda: find_adjacent_blocks_union_find(matrix), number=1)
 
-# Find and print connected blocks using Union-Find
+# Print the result and execution time
 result_union_find = find_adjacent_blocks_union_find(matrix)
 print_colored_matrix(matrix, result_union_find)
+print("Execution time:", time_taken, "seconds")
