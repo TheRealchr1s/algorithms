@@ -82,6 +82,16 @@ int main() {
         }
     }
 
+    std::cout << "Original matrix:" << std::endl;
+    for (const auto& row : matrix) {
+        for (const auto& cell : row) {
+            std::cout << cell << " ";
+        }
+        std::cout << std::endl;
+    }
+    std::cout << "\n\n\n";
+    std::cout << "Connected component matrix:" << std::endl;
+
     auto result = findAdjacentBlocks(matrix);
     printColoredMatrix(matrix, result);
 
