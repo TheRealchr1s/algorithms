@@ -11,11 +11,12 @@ bool isValid(int row, int col, const std::vector<std::vector<int>>& matrix, cons
 }
 
 void dfs(int row, int col, const std::vector<std::vector<int>>& matrix, std::vector<std::vector<bool>>& visited, std::vector<std::pair<int, int>>& currentBlock) {
-    visited[row][col] = true;
-    currentBlock.push_back(std::make_pair(row, col));
+    visited[row][col] = true; // mark the cell as visited
+    currentBlock.push_back(std::make_pair(row, col)); // add the cell to the current block
 
-    std::vector<std::pair<int, int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+    std::vector<std::pair<int, int>> directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} }; // up, down, left, right directions
 
+    // DFS all the adjacent cells in the current block (connected component)
     for (const auto& direction : directions) {
         int dr = direction.first;
         int dc = direction.second;
@@ -28,7 +29,7 @@ void dfs(int row, int col, const std::vector<std::vector<int>>& matrix, std::vec
 }
 
 std::vector<std::vector<std::pair<int, int>>> findAdjacentBlocks(const std::vector<std::vector<int>>& matrix) {
-    std::vector<std::vector<bool>> visited(matrix.size(), std::vector<bool>(matrix[0].size(), false));
+    std::vector<std::vector<bool>> visited(matrix.size(), std::vector<bool>(matrix[0].size(), false)); // visited cells
     std::vector<std::vector<std::pair<int, int>>> blocks;
 
     for (int i = 0; i < matrix.size(); ++i) {
