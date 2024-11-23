@@ -1,34 +1,29 @@
 #include "renderer/renderer.h"
-#include <iostream>
+#include <ncurses.h>
 
 Renderer::Renderer(int w, int h, char p, char e, char b)
     : width(w), height(h), playerChar(p), emptyChar(e), borderChar(b) {}
 
 void Renderer::render(const Player &player)
 {
-    clearScreen();
+    clear();
     for (int i = 0; i < height; ++i)
     {
         for (int j = 0; j < width; ++j)
         {
             if (i == 0 || i == height - 1 || j == 0 || j == width - 1)
             {
-                std::cout << borderChar;
+                mvaddch(i, j, borderChar);
             }
             else if (i == player.y && j == player.x)
             {
-                std::cout << playerChar;
+                mvaddch(i, j, playerChar);
             }
             else
             {
-                std::cout << emptyChar;
+                mvaddch(i, j, emptyChar);
             }
         }
-        std::cout << std::endl;
     }
-}
-
-void Renderer::clearScreen()
-{
-    std::cout << "\x1B[2J\x1B[H";
+    refresh();
 }

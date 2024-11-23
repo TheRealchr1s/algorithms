@@ -1,12 +1,20 @@
 #include "player/player.h"
 #include "renderer/renderer.h"
 #include "utils/utils.h"
+#include <ncurses.h>
 #include <thread>
 #include <chrono>
 #include <algorithm>
 
 int main()
 {
+    initscr();
+    cbreak();
+    noecho();
+    keypad(stdscr, TRUE);
+    curs_set(0);
+    timeout(100);
+
     const int width = 20;
     const int height = 10;
     Renderer renderer(width, height, '@', ' ', '#');
@@ -16,13 +24,13 @@ int main()
 
     while (true)
     {
-        if (isKeyPressed())
+        int ch = getKey();
+        if (ch != ERR)
         {
-            char key = getKey();
             int newX = player.x;
             int newY = player.y;
 
-            switch (key)
+            switch (ch)
             {
             case 'w':
                 newY = std::max(1, player.y - 1);
@@ -49,5 +57,6 @@ int main()
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
+    endwin();
     return 0;
 }

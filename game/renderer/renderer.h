@@ -11,7 +11,6 @@ public:
     Renderer(int w, int h, char p, char e, char b);
 
     void render(const Player &player);
-    void clearScreen();
 };
 
 #endif // RENDERER_H
