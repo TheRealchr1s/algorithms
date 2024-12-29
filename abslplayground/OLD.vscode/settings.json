@@ -1,0 +1,24 @@
+{
+    "clangd.arguments": [
+        "--header-insertion=never",
+        "--compile-commands-dir=${workspaceFolder}/build",
+        "--query-driver=/usr/bin/clang++,/usr/local/bin/clang++",
+        "-std=c++23"
+    ],
+    "C_Cpp.intelliSenseEngine": "Disabled", // Disable Microsoft's IntelliSense
+    "editor.formatOnSave": true,
+    "files.associations": {
+        "*.bazel": "starlark",
+        "BUILD": "starlark",
+        "WORKSPACE": "starlark",
+        "vector": "cpp"
+    },
+    "bazel.buildifierPath": "/usr/local/bin/buildifier", // Adjust path if needed
+    "bazel.executable": "/usr/local/bin/bazel", // Adjust path if needed
+    "bazel.buildFlags": [
+        "--cxxopt=-std=c++23"
+    ],
+    "[cpp]": {
+        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+    }
+}

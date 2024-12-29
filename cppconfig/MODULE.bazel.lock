@@ -17,6 +17,7 @@
     "https://bcr.bazel.build/modules/bazel_skylib/1.2.1/MODULE.bazel": "f35baf9da0efe45fa3da1696ae906eea3d615ad41e2e3def4aeb4e8bc0ef9a7a",
     "https://bcr.bazel.build/modules/bazel_skylib/1.3.0/MODULE.bazel": "20228b92868bf5cfc41bda7afc8a8ba2a543201851de39d990ec957b513579c5",
     "https://bcr.bazel.build/modules/bazel_skylib/1.4.1/MODULE.bazel": "a0dcb779424be33100dcae821e9e27e4f2901d9dfd5333efe5ac6a8d7ab75e1d",
+    "https://bcr.bazel.build/modules/bazel_skylib/1.4.2/MODULE.bazel": "3bd40978e7a1fac911d5989e6b09d8f64921865a45822d8b09e815eaa726a651",
     "https://bcr.bazel.build/modules/bazel_skylib/1.5.0/MODULE.bazel": "32880f5e2945ce6a03d1fbd588e9198c0a959bb42297b2cfaf1685b7bc32e138",
     "https://bcr.bazel.build/modules/bazel_skylib/1.6.1/MODULE.bazel": "8fdee2dbaace6c252131c00e1de4b165dc65af02ea278476187765e1a617b917",
     "https://bcr.bazel.build/modules/bazel_skylib/1.6.1/source.json": "082ed5f9837901fada8c68c2f3ddc958bb22b6d654f71dd73f3df30d45d4b749",
@@ -70,6 +71,8 @@
     "https://bcr.bazel.build/modules/rules_python/0.4.0/MODULE.bazel": "9208ee05fd48bf09ac60ed269791cf17fb343db56c8226a720fbb1cdf467166c",
     "https://bcr.bazel.build/modules/stardoc/0.5.1/MODULE.bazel": "1a05d92974d0c122f5ccf09291442580317cdd859f07a8655f1db9a60374f9f8",
     "https://bcr.bazel.build/modules/stardoc/0.5.1/source.json": "a96f95e02123320aa015b956f29c00cb818fa891ef823d55148e1a362caacf29",
+    "https://bcr.bazel.build/modules/toolchains_llvm/0.10.3/MODULE.bazel": "d4bae4c78eeea299c8acb374a86cb4f321977bed73d973ec3e795107082d02b8",
+    "https://bcr.bazel.build/modules/toolchains_llvm/0.10.3/source.json": "0e0533c5714c52de0c82ef774b4c56bccb992aa07bd7908735ab158da85460b4",
     "https://bcr.bazel.build/modules/upb/0.0.0-20220923-a547704/MODULE.bazel": "7298990c00040a0e2f121f6c32544bab27d4452f80d9ce51349b1a28f3005c43",
     "https://bcr.bazel.build/modules/upb/0.0.0-20220923-a547704/source.json": "f1ef7d3f9e0e26d4b23d1c39b5f5de71f584dd7d1b4ef83d9bbba6ec7a6a6459",
     "https://bcr.bazel.build/modules/zlib/1.2.11/MODULE.bazel": "07b389abc85fdbca459b69e2ec656ae5622873af3f845e1c9d80fe179f3effa0",
@@ -300,6 +303,73 @@
             "rules_python~",
             "bazel_tools",
             "bazel_tools"
+          ]
+        ]
+      }
+    },
+    "@@toolchains_llvm~//toolchain/extensions:llvm.bzl%llvm": {
+      "general": {
+        "bzlTransitiveDigest": "sZDBDkpKInFL6Al7kFTK7nsL1V5gBhPhh1dLMiN8NHI=",
+        "usagesDigest": "jAGtS2K2a9qmGF3/dhIIVswlqYDFWXHXraOYKZMJGLk=",
+        "recordedFileInputs": {},
+        "recordedDirentsInputs": {},
+        "envVariables": {},
+        "generatedRepoSpecs": {
+          "llvm_toolchain_llvm": {
+            "bzlFile": "@@toolchains_llvm~//toolchain:rules.bzl",
+            "ruleClassName": "llvm",
+            "attributes": {
+              "alternative_llvm_sources": [],
+              "auth_patterns": {},
+              "distribution": "auto",
+              "llvm_mirror": "",
+              "llvm_version": "15.0.6",
+              "llvm_versions": {},
+              "netrc": "",
+              "sha256": {},
+              "strip_prefix": {},
+              "urls": {}
+            }
+          },
+          "llvm_toolchain": {
+            "bzlFile": "@@toolchains_llvm~//toolchain:rules.bzl",
+            "ruleClassName": "toolchain",
+            "attributes": {
+              "absolute_paths": false,
+              "compile_flags": {},
+              "coverage_compile_flags": {},
+              "coverage_link_flags": {},
+              "cxx_builtin_include_directories": {},
+              "cxx_flags": {},
+              "cxx_standard": {
+                "": "c++2b"
+              },
+              "dbg_compile_flags": {},
+              "link_flags": {},
+              "link_libs": {},
+              "llvm_versions": {
+                "": "15.0.6"
+              },
+              "opt_compile_flags": {},
+              "opt_link_flags": {},
+              "stdlib": {},
+              "sysroot": {},
+              "target_settings": {},
+              "toolchain_roots": {},
+              "unfiltered_compile_flags": {}
+            }
+          }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "toolchains_llvm~",
+            "bazel_tools",
+            "bazel_tools"
+          ],
+          [
+            "toolchains_llvm~",
+            "toolchains_llvm",
+            "toolchains_llvm~"
           ]
         ]
       }

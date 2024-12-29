@@ -1,0 +1,19 @@
+{
+    "C_Cpp.intelliSenseEngine": "default", // Disable Microsoft's IntelliSense,
+    // use compile_commands.json instead
+    "C_Cpp.default.compilerPath": "/usr/bin/clang++", // Adjust path if needed
+    "editor.formatOnSave": true,
+    "files.associations": {
+        "*.bazel": "starlark",
+        "BUILD": "starlark",
+        "WORKSPACE": "starlark",
+        "vector": "cpp",
+        "unordered_set": "cpp",
+        "iostream": "cpp",
+        "cmath": "cpp"
+    },
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    },
+    "cmake.ignoreCMakeListsMissing": true
+}

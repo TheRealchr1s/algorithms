@@ -1,0 +1,32 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "/usr/local/bin/bazel", // Adjust if Bazel is installed elsewhere
+            "args": [
+                "build",
+                "//:all"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "/usr/local/bin/bazel",
+            "args": [
+                "clean"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        }
+    ]
+}

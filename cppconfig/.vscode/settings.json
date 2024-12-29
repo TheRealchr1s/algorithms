@@ -1,0 +1,6 @@
+{
+    "C_Cpp.autocomplete": "disabled",
+    "clang.cxxflags": [
+        "-std=c++23"
+    ]
+}

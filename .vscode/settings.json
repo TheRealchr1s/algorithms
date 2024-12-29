@@ -64,6 +64,9 @@
         "optional": "cpp",
         "ratio": "cpp",
         "sstream": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "print": "cpp",
+        "queue": "cpp",
+        "stack": "cpp"
     }
 }
