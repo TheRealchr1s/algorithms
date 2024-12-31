@@ -89,6 +89,30 @@ FindCulpritNodes(const std::vector<EdgeMetric> &edge_metrics) {
   return suspects;
 }
 
+// Add a function to render the network topology
+void RenderNetworkTopology(const std::vector<EdgeMetric> &edge_metrics) {
+  std::cout << "Network Topology:" << std::endl;
+  for (const auto &metric : edge_metrics) {
+    std::cout << metric.node1 << " <--> " << metric.node2;
+    if (!metric.has_packet_loss && !metric.has_latency) {
+      std::cout << " [Metrics Missing]";
+    } else {
+      std::cout << " [";
+      if (metric.has_packet_loss) {
+        std::cout << "Packet Loss: " << metric.packet_loss << "%";
+        if (metric.has_latency) {
+          std::cout << ", ";
+        }
+      }
+      if (metric.has_latency) {
+        std::cout << "Latency: " << metric.latency << "ms";
+      }
+      std::cout << "]";
+    }
+    std::cout << std::endl;
+  }
+}
+
 int main() {
   // Example edge metrics with missing data
   std::vector<EdgeMetric> edge_metrics = {
@@ -99,6 +123,9 @@ int main() {
       {"B", "D", 0.5, 90.0, true, true},  // Normal
       {"D", "E", 0.0, 0.0, false, false}  // Missing metrics
   };
+
+  // Render the network topology
+  RenderNetworkTopology(edge_metrics);
 
   // Find and print suspect nodes
   absl::flat_hash_set<std::string> suspects = FindCulpritNodes(edge_metrics);
