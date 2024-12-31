@@ -1,18 +1,5 @@
-"""This is a Bazel module file."""
-module(name = "name", version = "0.0")
-
-bazel_dep(name = "toolchains_llvm", version = "0.10.3")
-
-# Configure the LLVM toolchain.
-llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
-llvm.toolchain(
-    llvm_version = "16.0.0",
-    cxx_standard = {"": "c++2b"},
-)
-
-use_repo(llvm, "llvm_toolchain")
-
-register_toolchains("@llvm_toolchain//:all")
+"""Module for network analysis."""
+module(name = "CulpritSet", version = "1.0.0")
 
 bazel_dep(
     name = "abseil-cpp",
